@@ -26,20 +26,20 @@ jobs:
         REPO_BRANCH: master
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
     - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
+      run: cd openwrt18.06 && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      run: cd openwrt18.06 && ./scripts/feeds install -a
     
     - name: Costom configure file
       run: |
-          cd openwrt
+          cd openwrt18.06
           rm -f .config
           cp .x64 .config
 
     - name: Make download
       run: |
-          cd openwrt
+          cd openwrt18.06
           make download -j8
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
